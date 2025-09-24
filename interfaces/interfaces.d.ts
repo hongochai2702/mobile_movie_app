@@ -15,7 +15,23 @@ interface Movie {
 	vote_count: number;
 }
 
-interface TrendingMovie {
+// Web SDK supports generics for type safety
+interface Metrics {
+	$createdAt: string;
+	$updatedAt: string;
+	$id: string;
+	$sequence: number;
+	$tableId: string;
+	$databaseId: string;
+	$permissions: string[];
+	count?: number;
+	movie_id: number;
+	searchTerm: string;
+	poster_url: string;
+	title: string;
+}
+
+interface TrendingMovie extends Metrics {
 	searchTerm: string;
 	movie_id: number;
 	title: string;

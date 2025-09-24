@@ -13,15 +13,14 @@ const Search = () => {
 	const [searchQuery, setSearchQuery] = useState<string>("");
 	const router = useRouter();
 	const {
-		data: movies,
+		data: movies = [],
 		loading,
 		error,
 		refetch: reFetchMovies,
 		reset,
-	} = useFetch(() => fetchMovies({ query: searchQuery }), true);
+	} = useFetch(() => fetchMovies({ query: searchQuery }), false);
 
 	useEffect(() => {
-		updateSearchCount(searchQuery, movies?.[0]);
 		const delayDebounceFn = setTimeout(
 			async () => (searchQuery.trim() ? await reFetchMovies() : reset()),
 			500
@@ -30,6 +29,13 @@ const Search = () => {
 		return () => clearTimeout(delayDebounceFn);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchQuery]);
+
+	useEffect(() => {
+		if (movies && movies?.length > 0 && movies[0]) {
+			updateSearchCount(searchQuery, movies[0]);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [movies]);
 
 	return (
 		<View className="flex-1 bg-primary">
