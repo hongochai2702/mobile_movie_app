@@ -4,10 +4,15 @@ interface Movie {
 	adult: boolean;
 	backdrop_path: string;
 	genre_ids: number[];
+	genres: { id: number; name: string }[];
+	production_companies: { id: number; name: string }[];
 	original_language: string;
 	original_title: string;
 	overview: string;
 	popularity: number;
+	budget: number;
+	revenue: number;
+	runtime: number;
 	poster_path: string;
 	release_date: string;
 	video: boolean;
